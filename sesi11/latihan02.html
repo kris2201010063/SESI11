@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 2 JSON</title>
+</head>
+<body>
+
+    <div id="Tampilkan"></div>
+    
+    
+    <script>
+        const bc = new XMLHttpRequest();
+        bc.open("GET","http://localhost/sesi11/latihan02.php");
+        bc.send();
+        
+        bc.onload = function(){
+            const dt = JSON.parse(this.responseText);
+
+            console.log(dt);
+
+           let tx = '<table><tr><td>#</td><td>Nama Lengkap</td><td>Jenis Klamin</td><td>TGL lahir</td><td>Jurusan</td><td>Alamat</td></tr>';
+           let no = 0;
+           for(let i=0;i<dt.length;i++){
+                let jkel= (dt[i].jkel=="L")?"laki-laki":"Perempuan";
+            no++;
+               tx += '<tr>';
+               tx += '   <td>'+no+'</td>';
+               tx += '   <td>'+dt[i].NAMA+'</td>';
+               tx += '   <td>'+jkel+'</td>';
+               tx += '   <td>'+dt[i].TGL_LAHIR+'</td>';
+               tx += '   <td>'+dt[i].JURUSAN+'</td>';
+               tx += '   <td>'+dt[i].ALAMAT+'</td>';
+               tx += ' </tr>';
+              
+            }
+               tx += '</table>';
+               document.getElementById("Tampilkan").innerHTML = tx;
+        }
+    </script>
+ </body>
+ </html>

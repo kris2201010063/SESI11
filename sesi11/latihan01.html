@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 1 JSON</title>
+</head>
+<body>
+    
+    Nama: <span id="txNAMA"></span><br>
+    TGL Lahir: <span id="txTALAG"></span><br>
+    Alamat: <span id="txALT"></span><br>
+    Jurusan: <span id="txJSR"></span><br>
+    Jenis kelamin: <span id="txJKEL"></span><br>
+    
+
+    
+
+    
+
+
+
+        <script>
+          const bc = new XMLHttpRequest();
+          bc.open("GET","http://localhost/sesi11/latihan01.php");
+          bc.send();
+
+          bc.onload = function(){
+            const dt = JSON.parse(this.responseText);
+
+            console.log(dt);
+            let jkel = "laki-laki";
+            if(dt.JKEL=="P"){
+                jkel = "Perempuan";
+            }
+            document.getElementById("txNAMA").innerHTML=dt.NAMA
+            document.getElementById("txTALAG").innerHTML=dt.TGL_LAHIR
+            document.getElementById("txALT").innerHTML=dt.ALAMAT
+            document.getElementById("txJSR").innerHTML=dt.JURUSAN
+            document.getElementById("txJKEL").innerHTML=jkel;
+            
+
+          }
+
+        </script>
+</body>
+</html>
